@@ -699,17 +699,29 @@ export function activate(context: vscode.ExtensionContext) {
     }),
   );
 
-  // Context menu commands (open Claude CLI in terminal)
+  // Context menu commands (Explain, Fix, Do) — works with both CLI and API backends
   context.subscriptions.push(
-    vscode.commands.registerCommand('bespoke-ai.explainSelection', () =>
-      explainSelection(lastConfig.contextMenu.permissionMode),
-    ),
-    vscode.commands.registerCommand('bespoke-ai.fixSelection', () =>
-      fixSelection(lastConfig.contextMenu.permissionMode),
-    ),
-    vscode.commands.registerCommand('bespoke-ai.doSelection', () =>
-      doSelection(lastConfig.contextMenu.permissionMode),
-    ),
+    vscode.commands.registerCommand('bespoke-ai.explainSelection', async () => {
+      if (!lastConfig.enabled) {
+        vscode.window.showWarningMessage('Bespoke AI is disabled. Enable it first.');
+        return;
+      }
+      await explainSelection(backendRouter, logger, lastConfig.contextMenu.permissionMode);
+    }),
+    vscode.commands.registerCommand('bespoke-ai.fixSelection', async () => {
+      if (!lastConfig.enabled) {
+        vscode.window.showWarningMessage('Bespoke AI is disabled. Enable it first.');
+        return;
+      }
+      await fixSelection(backendRouter, logger, lastConfig.contextMenu.permissionMode);
+    }),
+    vscode.commands.registerCommand('bespoke-ai.doSelection', async () => {
+      if (!lastConfig.enabled) {
+        vscode.window.showWarningMessage('Bespoke AI is disabled. Enable it first.');
+        return;
+      }
+      await doSelection(backendRouter, logger, lastConfig.contextMenu.permissionMode);
+    }),
   );
 
   context.subscriptions.push(
