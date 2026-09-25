@@ -121,17 +121,17 @@
       "editor/context": [
         {
           "command": "bespoke-ai.explainSelection",
-          "when": "editorHasSelection && bespokeAI.cliAvailable",
+          "when": "editorHasSelection",
           "group": "0_bespoke@1"
         },
         {
           "command": "bespoke-ai.fixSelection",
-          "when": "editorHasSelection && bespokeAI.cliAvailable",
+          "when": "editorHasSelection",
           "group": "0_bespoke@2"
         },
         {
           "command": "bespoke-ai.doSelection",
-          "when": "editorHasSelection && bespokeAI.cliAvailable",
+          "when": "editorHasSelection",
           "group": "0_bespoke@3"
         }
       ]
